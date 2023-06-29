@@ -13,9 +13,6 @@
 
 package com.bmwcarit.barefoot.analysis;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
@@ -26,7 +23,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.bmwcarit.barefoot.spatial.Geography;
 import com.bmwcarit.barefoot.spatial.SpatialOperator;

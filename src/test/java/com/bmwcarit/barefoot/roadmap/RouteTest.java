@@ -13,17 +13,14 @@
 
 package com.bmwcarit.barefoot.roadmap;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.junit.Test;
 
 import com.bmwcarit.barefoot.road.BaseRoad;
 import com.bmwcarit.barefoot.road.Heading;
@@ -37,6 +34,10 @@ import com.esri.core.geometry.Point;
 import com.esri.core.geometry.Polyline;
 import com.esri.core.geometry.WktExportFlags;
 import com.esri.core.geometry.WktImportFlags;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class RouteTest {
 
@@ -197,10 +198,10 @@ public class RouteTest {
             {
                 RoadPoint source = new RoadPoint(map.get(7), 0.3);
                 RoadPoint target = new RoadPoint(map.get(7), 0.8);
-                List<Road> path = new LinkedList<>(Arrays.asList(map.get(7)));
+                List<Road> path = new LinkedList<>(Collections.singletonList(map.get(7)));
                 Route route = new Route(source, target, path);
 
-                List<String> sequence = new LinkedList<>(Arrays.asList(p5));
+                List<String> sequence = new LinkedList<>(List.of(p5));
 
                 int count = route.geometry().getPointCount();
                 assertEquals(sequence.size(), count - 2);
@@ -223,7 +224,7 @@ public class RouteTest {
             {
                 RoadPoint source = new RoadPoint(map.get(7), 0.8);
                 RoadPoint target = new RoadPoint(map.get(7), 0.9);
-                List<Road> path = new LinkedList<>(Arrays.asList(map.get(7)));
+                List<Road> path = new LinkedList<>(Collections.singletonList(map.get(7)));
                 Route route = new Route(source, target, path);
 
                 List<String> sequence = new LinkedList<>();
@@ -312,7 +313,7 @@ public class RouteTest {
         {
             RoadPoint point11 = new RoadPoint(map.get(2), 0.3);
             RoadPoint point12 = new RoadPoint(map.get(2), 0.7);
-            List<Road> path1 = new LinkedList<>(Arrays.asList(map.get(2)));
+            List<Road> path1 = new LinkedList<>(Collections.singletonList(map.get(2)));
             Route route1 = new Route(point11, point12, path1);
 
             RoadPoint point21 = new RoadPoint(map.get(2), 0.7);
@@ -334,7 +335,7 @@ public class RouteTest {
             assertEquals(point22.geometry().getY(), route1.geometry().getPoint(count - 1).getY(),
                     1E-6);
 
-            List<String> sequence = new LinkedList<>(Arrays.asList(p2));
+            List<String> sequence = new LinkedList<>(List.of(p2));
 
             assertEquals(sequence.size(), route1.geometry().getPointCount() - 2);
 

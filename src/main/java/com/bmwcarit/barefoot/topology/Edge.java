@@ -14,10 +14,13 @@
 package com.bmwcarit.barefoot.topology;
 
 
+import java.io.Serial;
+
 /**
  * Simple implementation of {@link AbstractEdge}.
  */
 public class Edge extends AbstractEdge<Edge> {
+    @Serial
     private static final long serialVersionUID = 1L;
     private final long id;
     private final long source;

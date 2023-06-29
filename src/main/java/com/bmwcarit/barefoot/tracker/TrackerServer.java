@@ -268,9 +268,9 @@ public class TrackerServer extends AbstractServer {
     };
 
     private static class StatePublisher extends Thread implements Publisher<State> {
-        private BlockingQueue<String> queue = new LinkedBlockingDeque<>();
-        private ZMQ.Context context = null;
-        private ZMQ.Socket socket = null;
+        private final BlockingQueue<String> queue = new LinkedBlockingDeque<>();
+        private ZMQ.Context context;
+        private ZMQ.Socket socket;
 
         public StatePublisher(int port) {
             context = ZMQ.context(1);

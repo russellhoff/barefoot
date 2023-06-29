@@ -27,7 +27,7 @@ import org.slf4j.LoggerFactory;
 public class Group {
     private final static Logger logger = LoggerFactory.getLogger(Group.class);
     private final Scheduler scheduler;
-    final Queue<Exception> exceptions = new ConcurrentLinkedQueue<Exception>();
+    final Queue<Exception> exceptions = new ConcurrentLinkedQueue<>();
     final Lock syncLock = new ReentrantLock();
     final Condition syncCond = syncLock.newCondition();
     final AtomicInteger syncTasks = new AtomicInteger();
@@ -89,7 +89,7 @@ public class Group {
             }
             syncLock.unlock();
         }
-        logger.trace("group {} synchronized", this.toString());
+        logger.trace("group {} synchronized", this);
 
         return exceptions.isEmpty() && !cancelled.get();
     }

@@ -13,8 +13,6 @@
 
 package com.bmwcarit.barefoot.roadmap;
 
-import static org.junit.Assert.assertEquals;
-
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
@@ -22,14 +20,15 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
-import org.junit.Test;
-
 import com.bmwcarit.barefoot.road.BaseRoad;
 import com.esri.core.geometry.Geometry;
 import com.esri.core.geometry.GeometryEngine;
 import com.esri.core.geometry.Point;
 import com.esri.core.geometry.Polyline;
 import com.esri.core.geometry.WktImportFlags;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class RoadMapTest {
     private static List<BaseRoad> osmroads() {
@@ -113,7 +112,7 @@ public class RoadMapTest {
 
         {
             Set<RoadPoint> points = map.spatial().nearest(new Point(11.343629, 48.083797));
-            Set<Long> neighbors = new HashSet<>(Arrays.asList(6L));
+            Set<Long> neighbors = new HashSet<>(List.of(6L));
 
             assertEquals(neighbors.size(), points.size());
             for (RoadPoint point : points) {
@@ -143,7 +142,7 @@ public class RoadMapTest {
 
         {
             Set<RoadPoint> points = map.spatial().radius(new Point(11.343629, 48.083797), 10.0);
-            Set<Long> neighbors = new HashSet<>(Arrays.asList(6L));
+            Set<Long> neighbors = new HashSet<>(List.of(6L));
 
             assertEquals(neighbors.size(), points.size());
             for (RoadPoint point : points) {

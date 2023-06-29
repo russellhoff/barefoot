@@ -21,6 +21,8 @@ import com.bmwcarit.barefoot.road.Heading;
 import com.bmwcarit.barefoot.topology.AbstractEdge;
 import com.esri.core.geometry.Polyline;
 
+import java.io.Serial;
+
 /**
  * Directed road wrapper of {@link BaseRoad} objects in a directed road map ({@link RoadMap}). *
  * <p>
@@ -31,6 +33,7 @@ import com.esri.core.geometry.Polyline;
  * and <i>i * 2 + 1</i> of the backward directed {@link Road}.
  */
 public class Road extends AbstractEdge<Road> {
+    @Serial
     private static final long serialVersionUID = 1L;
     private final BaseRoad base;
     private final Heading heading;

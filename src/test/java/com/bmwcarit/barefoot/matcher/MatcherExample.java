@@ -21,8 +21,6 @@ import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.junit.Ignore;
-import org.junit.Test;
 
 import com.bmwcarit.barefoot.roadmap.Loader;
 import com.bmwcarit.barefoot.roadmap.Road;
@@ -31,6 +29,8 @@ import com.bmwcarit.barefoot.roadmap.RoadPoint;
 import com.bmwcarit.barefoot.roadmap.TimePriority;
 import com.bmwcarit.barefoot.spatial.Geography;
 import com.bmwcarit.barefoot.topology.Dijkstra;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 public class MatcherExample {
 
@@ -44,7 +44,7 @@ public class MatcherExample {
         return samples;
     }
 
-    @Ignore
+    @Disabled
     @Test
     public void offline() throws IOException, JSONException {
         // Load and construct road map
@@ -72,7 +72,7 @@ public class MatcherExample {
         }
     }
 
-    @Ignore
+    @Disabled
     @Test
     public void online() throws IOException, JSONException {
         // Load and construct road map

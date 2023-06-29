@@ -13,18 +13,12 @@
 
 package com.bmwcarit.barefoot.spatial;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
-
-import org.junit.Test;
 
 import com.bmwcarit.barefoot.util.Triple;
 import com.bmwcarit.barefoot.util.Tuple;
@@ -33,6 +27,10 @@ import com.esri.core.geometry.GeometryEngine;
 import com.esri.core.geometry.Point;
 import com.esri.core.geometry.Polyline;
 import com.esri.core.geometry.WktImportFlags;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class QuadTreeIndexTest {
     private static List<Polyline> geometries() {
@@ -311,14 +309,7 @@ public class QuadTreeIndexTest {
                 index.add(id, line);
             }
 
-            Collections.sort(lines, new Comparator<Triple<Integer, Polyline, Double>>() {
-                @Override
-                public int compare(Triple<Integer, Polyline, Double> left,
-                        Triple<Integer, Polyline, Double> right) {
-                    return left.three() < right.three() ? -1
-                            : left.three() > right.three() ? +1 : 0;
-                }
-            });
+            lines.sort(Comparator.comparing(Triple::three));
 
             Set<Integer> neighbors = new HashSet<>();
 
@@ -354,14 +345,7 @@ public class QuadTreeIndexTest {
                 index.add(id, line);
             }
 
-            Collections.sort(lines, new Comparator<Triple<Integer, Polyline, Double>>() {
-                @Override
-                public int compare(Triple<Integer, Polyline, Double> left,
-                        Triple<Integer, Polyline, Double> right) {
-                    return left.three() < right.three() ? -1
-                            : left.three() > right.three() ? +1 : 0;
-                }
-            });
+            lines.sort(Comparator.comparing(Triple::three));
 
             Set<Integer> neighbors = new HashSet<>();
 
@@ -397,14 +381,7 @@ public class QuadTreeIndexTest {
                 index.add(id, line);
             }
 
-            Collections.sort(lines, new Comparator<Triple<Integer, Polyline, Double>>() {
-                @Override
-                public int compare(Triple<Integer, Polyline, Double> left,
-                        Triple<Integer, Polyline, Double> right) {
-                    return left.three() < right.three() ? -1
-                            : left.three() > right.three() ? +1 : 0;
-                }
-            });
+            lines.sort(Comparator.comparing(Triple::three));
 
             Set<Integer> neighbors = new HashSet<>();
 

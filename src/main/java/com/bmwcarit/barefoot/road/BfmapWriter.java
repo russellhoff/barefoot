@@ -42,11 +42,7 @@ public class BfmapWriter implements RoadWriter {
 
     @Override
     public boolean isOpen() {
-        if (writer != null) {
-            return true;
-        } else {
-            return false;
-        }
+        return writer != null;
     }
 
     @Override

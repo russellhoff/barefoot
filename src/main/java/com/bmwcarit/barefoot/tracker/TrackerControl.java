@@ -31,8 +31,8 @@ import com.bmwcarit.barefoot.util.SourceException;
 public abstract class TrackerControl {
     private final static Logger logger = LoggerFactory.getLogger(TrackerControl.class);
     private static TrackerServer trackerServer = null;
-    private static Properties databaseProperties = new Properties();
-    private static Properties serverProperties = new Properties();
+    private static final Properties databaseProperties = new Properties();
+    private static final Properties serverProperties = new Properties();
 
     /**
      * Initializes stand-alone online map matching server (tracker). Server properties file must

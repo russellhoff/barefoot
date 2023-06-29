@@ -13,10 +13,7 @@
 
 package com.bmwcarit.barefoot.topology;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-
+import java.io.Serial;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -26,18 +23,20 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import org.junit.Test;
-
 import com.bmwcarit.barefoot.util.Tuple;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class DijkstraTest {
 
     private static class Road extends AbstractEdge<Road> {
+        @Serial
         private static final long serialVersionUID = 1L;
         private final long id;
         private final long source;
         private final long target;
-        private float weight;
+        private final float weight;
 
         public Road(long id, long source, long target, float weight) {
             this.id = id;
@@ -95,7 +94,7 @@ public class DijkstraTest {
                     router.route(sources, targets, new Weight(), null, null);
 
             Tuple<Point<Road>, List<Road>> route = routes.get(targets.iterator().next());
-            List<Long> path = new LinkedList<>(Arrays.asList(0L));
+            List<Long> path = new LinkedList<>(List.of(0L));
 
             assertNotNull(route);
             assertEquals(path.get(0).longValue(), route.one().edge().id());
@@ -116,7 +115,7 @@ public class DijkstraTest {
                     router.route(sources, targets, new Weight(), null, null);
 
             Tuple<Point<Road>, List<Road>> route = routes.get(targets.iterator().next());
-            List<Long> path = new LinkedList<>(Arrays.asList(0L));
+            List<Long> path = new LinkedList<>(List.of(0L));
 
             assertNotNull(route);
             assertEquals(path.get(0).longValue(), route.one().edge().id());
@@ -191,7 +190,7 @@ public class DijkstraTest {
                     router.route(sources, targets, new Weight(), null, null);
 
             Tuple<Point<Road>, List<Road>> route = routes.get(targets.iterator().next());
-            List<Long> path = new LinkedList<>(Arrays.asList(0L));
+            List<Long> path = new LinkedList<>(List.of(0L));
 
             assertNotNull(route);
             assertEquals(path.get(0).longValue(), route.one().edge().id());

@@ -136,18 +136,10 @@ public abstract class ServerControl {
         if (args.length > 2) {
             for (int i = 0; i < args.length - 2; ++i) {
                 switch (args[i]) {
-                    case "--debug":
-                        output = new DebugJSONOutputFormatter();
-                        break;
-                    case "--slimjson":
-                        output = new SlimJSONOutputFormatter();
-                        break;
-                    case "--geojson":
-                        output = new GeoJSONOutputFormatter();
-                        break;
-                    default:
-                        logger.warn("invalid option {} ignored", args[i]);
-                        break;
+                    case "--debug" -> output = new DebugJSONOutputFormatter();
+                    case "--slimjson" -> output = new SlimJSONOutputFormatter();
+                    case "--geojson" -> output = new GeoJSONOutputFormatter();
+                    default -> logger.warn("invalid option {} ignored", args[i]);
                 }
             }
         }

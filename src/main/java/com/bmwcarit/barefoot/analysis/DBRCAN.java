@@ -88,7 +88,6 @@ public class DBRCAN {
      */
     protected static double epsilonRound(double value) {
         long precision = (long) Math.pow(10, Math.abs(Math.log10(epsilon)));
-        assert (precision < Double.MAX_VALUE);
 
         return Math.floor(value)
                 + (double) Math.round((value - Math.floor(value)) * precision) / precision;
@@ -126,25 +125,13 @@ public class DBRCAN {
         double mvalue = modulo(value, modulo);
 
         if (epsilonCompare(mleft, mright) == 0) {
-            if (epsilonCompare(mleft, mvalue) == 0) {
-                return true;
-            } else {
-                return false;
-            }
+            return epsilonCompare(mleft, mvalue) == 0;
         } else if (epsilonCompare(mleft, mright) < 0) {
-            if ((epsilonCompare(mvalue, mleft) == 0 || epsilonCompare(mvalue, mleft) > 0)
-                    && epsilonCompare(mvalue, mright) < 0) {
-                return true;
-            } else {
-                return false;
-            }
+            return (epsilonCompare(mvalue, mleft) == 0 || epsilonCompare(mvalue, mleft) > 0)
+                    && epsilonCompare(mvalue, mright) < 0;
         } else {
-            if (epsilonCompare(mvalue, mleft) == 0 || epsilonCompare(mvalue, mleft) > 0
-                    || epsilonCompare(mvalue, mright) < 0) {
-                return true;
-            } else {
-                return false;
-            }
+            return epsilonCompare(mvalue, mleft) == 0 || epsilonCompare(mvalue, mleft) > 0
+                    || epsilonCompare(mvalue, mright) < 0;
         }
     }
 
@@ -230,15 +217,10 @@ public class DBRCAN {
 
                 @Override
                 public boolean hasNext() {
-                    while ((it == null || !it.hasNext()) && seqit.hasNext()) {
+                    while ((it == null || !it.hasNext()) && seqit.hasNext())
                         it = seqit.next().iterator();
-                    }
 
-                    if (it == null || !it.hasNext()) {
-                        return false;
-                    } else {
-                        return true;
-                    }
+                    return it != null && it.hasNext();
                 }
 
                 @Override
@@ -357,7 +339,7 @@ public class DBRCAN {
             }
         }
 
-        if (left != null && right != null) {
+        if (left != null) {
             return new Tuple<>(epsilonRound(modulo(right - buffer, modulo)),
                     epsilonRound(modulo(left + buffer, modulo)));
         }
@@ -458,12 +440,12 @@ public class DBRCAN {
             }
         }
 
-        Collections.sort(function, new Comparator<Tuple<Double, Integer>>() {
+        function.sort(new Comparator<Tuple<Double, Integer>>() {
             @Override
             public int compare(Tuple<Double, Integer> left, Tuple<Double, Integer> right) {
                 return (DBRCAN.epsilonCompare(left.one(), right.one()) < 0) ? -1
                         : (DBRCAN.epsilonCompare(left.one(), right.one()) > 0) ? 1
-                                : (left.two() < right.two()) ? 1 : -1;
+                        : (left.two() < right.two()) ? 1 : -1;
             }
         });
 

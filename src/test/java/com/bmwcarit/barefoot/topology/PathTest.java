@@ -13,18 +13,15 @@
 
 package com.bmwcarit.barefoot.topology;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
-
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
+//import org.junit.Rule;
+import org.junit.jupiter.api.Test;
+//import org.junit.rules.ExpectedException;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class PathTest {
 
@@ -69,8 +66,8 @@ public class PathTest {
         }
     }
 
-    @Rule
-    public ExpectedException exception = ExpectedException.none();
+    /*@Rule
+    public ExpectedException exception = ExpectedException.none();*/
 
     @Test
     public void testValid() {
@@ -136,7 +133,7 @@ public class PathTest {
                 try {
                     new Path<>(source, target, edges);
                     fail();
-                } catch (Exception e) {
+                } catch (Exception ignored) {
                 }
             }
             {
@@ -192,7 +189,7 @@ public class PathTest {
                 try {
                     new Path<>(source, target, edges);
                     fail();
-                } catch (Exception e) {
+                } catch (Exception ignored) {
                 }
             }
             {
@@ -205,7 +202,7 @@ public class PathTest {
                 try {
                     new Path<>(source, target, edges);
                     fail();
-                } catch (Exception e) {
+                } catch (Exception ignored) {
                 }
             }
             {
@@ -217,7 +214,7 @@ public class PathTest {
                 try {
                     new Path<>(source, target, edges);
                     fail();
-                } catch (Exception e) {
+                } catch (Exception ignored) {
                 }
             }
             {
@@ -229,7 +226,7 @@ public class PathTest {
                 try {
                     new Path<>(source, target, edges);
                     fail();
-                } catch (Exception e) {
+                } catch (Exception ignored) {
                 }
             }
             {
@@ -258,7 +255,7 @@ public class PathTest {
                 try {
                     new Path<>(source, target, edges);
                     fail();
-                } catch (Exception e) {
+                } catch (Exception ignored) {
                 }
             }
             {
@@ -274,7 +271,7 @@ public class PathTest {
                 try {
                     new Path<>(source, target, edges);
                     fail();
-                } catch (Exception e) {
+                } catch (Exception ignored) {
                 }
             }
         }
@@ -443,7 +440,7 @@ public class PathTest {
                 assertEquals(target2.edge().id(), path1.target().edge().id());
                 assertEquals(target2.fraction(), path1.target().fraction(), 1E-10);
 
-                LinkedList<Long> edges = new LinkedList<>(Arrays.asList(0L));
+                LinkedList<Long> edges = new LinkedList<>(List.of(0L));
 
                 assertEquals(edges.size(), path1.path().size());
 
@@ -478,7 +475,7 @@ public class PathTest {
                 assertEquals(target2.edge().id(), path1.target().edge().id());
                 assertEquals(target2.fraction(), path1.target().fraction(), 1E-10);
 
-                LinkedList<Long> edges = new LinkedList<>(Arrays.asList(0L));
+                LinkedList<Long> edges = new LinkedList<>(List.of(0L));
 
                 assertEquals(edges.size(), path1.path().size());
 
@@ -507,7 +504,7 @@ public class PathTest {
                 assertEquals(target2.edge().id(), path1.target().edge().id());
                 assertEquals(target2.fraction(), path1.target().fraction(), 1E-10);
 
-                LinkedList<Long> edges = new LinkedList<>(Arrays.asList(0L));
+                LinkedList<Long> edges = new LinkedList<>(List.of(0L));
 
                 assertEquals(edges.size(), path1.path().size());
 
@@ -536,7 +533,7 @@ public class PathTest {
                 assertEquals(target2.edge().id(), path1.target().edge().id());
                 assertEquals(target2.fraction(), path1.target().fraction(), 1E-10);
 
-                LinkedList<Long> edges = new LinkedList<>(Arrays.asList(0L));
+                LinkedList<Long> edges = new LinkedList<>(List.of(0L));
 
                 assertEquals(edges.size(), path1.path().size());
 

@@ -14,8 +14,6 @@
 package com.bmwcarit.barefoot.matcher;
 
 import java.text.SimpleDateFormat;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -270,7 +268,7 @@ public class Matcher extends Filter<MatcherCandidate, MatcherTransition, Matcher
         final Map<MatcherCandidate, Map<MatcherCandidate, Tuple<MatcherTransition, Double>>> transitions =
                 new ConcurrentHashMap<>();
         final double bound = Math.max(1000d, Math.min(distance,
-                ((candidates.one().time() - predecessors.one().time()) / 1000) * 100));
+                ((double) (candidates.one().time() - predecessors.one().time()) / 1000) * 100));
 
         InlineScheduler scheduler = StaticScheduler.scheduler();
         for (final MatcherCandidate predecessor : predecessors.two()) {
@@ -364,12 +362,7 @@ public class Matcher extends Filter<MatcherCandidate, MatcherTransition, Matcher
      * @return State representation of the full matching which is a {@link KState} object.
      */
     public MatcherKState mmatch(List<MatcherSample> samples, double minDistance, int minInterval) {
-        Collections.sort(samples, new Comparator<MatcherSample>() {
-            @Override
-            public int compare(MatcherSample left, MatcherSample right) {
-                return (int) (left.time() - right.time());
-            }
-        });
+        samples.sort((left, right) -> (int) (left.time() - right.time()));
 
         MatcherKState state = new MatcherKState();
 

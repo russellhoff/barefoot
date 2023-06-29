@@ -12,6 +12,7 @@
  */
 package com.bmwcarit.barefoot.topology;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Iterator;
 
@@ -45,6 +46,7 @@ import java.util.Iterator;
  *        {@link AbstractEdge} type.)
  */
 public abstract class AbstractEdge<E extends AbstractEdge<E>> implements Serializable {
+    @Serial
     private static final long serialVersionUID = 1L;
     private transient E successor = null;
     private transient E neighbor = null;
@@ -112,8 +114,8 @@ public abstract class AbstractEdge<E extends AbstractEdge<E>> implements Seriali
      * @return Iterator over the edge's successor edges.
      */
     public Iterator<E> successors() {
-        return new Iterator<E>() {
-            E successor = successor();
+        return new Iterator<>() {
+            final E successor = successor();
             E iterator = successor;
 
             @Override

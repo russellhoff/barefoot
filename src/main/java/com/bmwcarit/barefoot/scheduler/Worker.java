@@ -23,7 +23,7 @@ import org.slf4j.LoggerFactory;
 
 class Worker extends Thread {
     private final static Logger logger = LoggerFactory.getLogger(Worker.class);
-    protected final Deque<Task> queue = new ConcurrentLinkedDeque<Task>();
+    protected final Deque<Task> queue = new ConcurrentLinkedDeque<>();
     private final Scheduler scheduler;
     final AtomicLong syncCount = new AtomicLong();
     final int workerid;

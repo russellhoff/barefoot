@@ -103,7 +103,7 @@ class TemporaryMemory<E extends TemporaryElement<E>> {
 
         @SuppressWarnings("unchecked")
         public void updateAndUnlock(int ttl, boolean publish) {
-            death = Math.max(death + 1, Calendar.getInstance().getTimeInMillis() + ttl * 1000);
+            death = Math.max(death + 1, Calendar.getInstance().getTimeInMillis() + ttl * 1000L);
             logger.debug("element '{}' updated with ttl {} (death in {})", id, ttl, death);
             memory.queue.add(new Tuple<>(death, (E) this));
             if (publish) {

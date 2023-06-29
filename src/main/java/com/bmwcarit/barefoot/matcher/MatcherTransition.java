@@ -25,7 +25,7 @@ import com.bmwcarit.barefoot.roadmap.Route;
  * contains a route between respective map positions.
  */
 public class MatcherTransition extends StateTransition {
-    private Route route = null;
+    private Route route;
 
     /**
      * Creates {@link MatcherTransition} object.

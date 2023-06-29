@@ -13,24 +13,17 @@
 
 package com.bmwcarit.barefoot.topology;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -50,6 +43,8 @@ import com.esri.core.geometry.GeometryEngine;
 import com.esri.core.geometry.Point;
 import com.esri.core.geometry.WktExportFlags;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 public class DijkstraBenchmark {
     private static Logger logger = LoggerFactory.getLogger(DijkstraBenchmark.class);
     private final RoadMap map;
@@ -63,8 +58,8 @@ public class DijkstraBenchmark {
         Set<RoadPoint> sources = map.spatial().nearest(new Point(11.58424, 48.17635));
         Set<RoadPoint> targets = map.spatial().nearest(new Point(11.56656, 48.17683));
 
-        assertTrue(!sources.isEmpty());
-        assertTrue(!targets.isEmpty());
+        assertFalse(sources.isEmpty());
+        assertFalse(targets.isEmpty());
 
         RoadPoint source = sources.iterator().next();
         RoadPoint target = targets.iterator().next();
@@ -85,8 +80,8 @@ public class DijkstraBenchmark {
         Point start = route.geometry().getPoint(0);
         Point end = route.geometry().getPoint(route.geometry().getPointCount() - 1);
 
-        assertTrue(source.geometry().equals(start));
-        assertTrue(target.geometry().equals(end));
+        assertEquals(source.geometry(), start);
+        assertEquals(target.geometry(), end);
 
         if (logger.isTraceEnabled()) {
             String filename = "diskstra_shortest.wkt";
@@ -103,8 +98,8 @@ public class DijkstraBenchmark {
         Set<RoadPoint> sources = map.spatial().nearest(new Point(11.58424, 48.17635));
         Set<RoadPoint> targets = map.spatial().nearest(new Point(11.72661, 48.39594));
 
-        assertTrue(!sources.isEmpty());
-        assertTrue(!targets.isEmpty());
+        assertFalse(sources.isEmpty());
+        assertFalse(targets.isEmpty());
 
         RoadPoint source = sources.iterator().next();
         RoadPoint target = targets.iterator().next();
@@ -125,8 +120,8 @@ public class DijkstraBenchmark {
         Point start = route.geometry().getPoint(0);
         Point end = route.geometry().getPoint(route.geometry().getPointCount() - 1);
 
-        assertTrue(source.geometry().equals(start));
-        assertTrue(target.geometry().equals(end));
+        assertEquals(source.geometry(), start);
+        assertEquals(target.geometry(), end);
 
         if (logger.isTraceEnabled()) {
             String filename = "dijkstra_fastest.wkt";
@@ -143,8 +138,8 @@ public class DijkstraBenchmark {
         Set<RoadPoint> sources = map.spatial().nearest(new Point(11.58424, 48.17635));
         Set<RoadPoint> targets = map.spatial().nearest(new Point(11.72661, 48.39594));
 
-        assertTrue(!sources.isEmpty());
-        assertTrue(!targets.isEmpty());
+        assertFalse(sources.isEmpty());
+        assertFalse(targets.isEmpty());
 
         RoadPoint source = sources.iterator().next();
         RoadPoint target = targets.iterator().next();
@@ -165,8 +160,8 @@ public class DijkstraBenchmark {
         Point start = route.geometry().getPoint(0);
         Point end = route.geometry().getPoint(route.geometry().getPointCount() - 1);
 
-        assertTrue(source.geometry().equals(start));
-        assertTrue(target.geometry().equals(end));
+        assertEquals(source.geometry(), start);
+        assertEquals(target.geometry(), end);
 
         if (logger.isTraceEnabled()) {
             String filename = "diskstra_fastest-priority.wkt";
@@ -183,8 +178,8 @@ public class DijkstraBenchmark {
         Set<RoadPoint> sources = map.spatial().nearest(new Point(11.58424, 48.17635));
         Set<RoadPoint> targets = map.spatial().nearest(new Point(11.59151, 48.15231));
 
-        assertTrue(!sources.isEmpty());
-        assertTrue(!targets.isEmpty());
+        assertFalse(sources.isEmpty());
+        assertFalse(targets.isEmpty());
 
         RoadPoint source = sources.iterator().next();
         RoadPoint target = targets.iterator().next();
@@ -196,7 +191,7 @@ public class DijkstraBenchmark {
         List<Road> edges = algo.route(source, target, new TimePriority());
         sw.stop();
 
-        assertTrue(edges == null);
+        assertNull(edges);
 
         logger.info("no route example (fastest, priority): {} ms", sw.ms());
     }
@@ -206,8 +201,8 @@ public class DijkstraBenchmark {
         Set<RoadPoint> sources = map.spatial().nearest(new Point(11.58424, 48.17635));
         Set<RoadPoint> targets = map.spatial().nearest(new Point(11.59151, 48.15231));
 
-        assertTrue(!sources.isEmpty());
-        assertTrue(!targets.isEmpty());
+        assertFalse(sources.isEmpty());
+        assertFalse(targets.isEmpty());
 
         RoadPoint source = sources.iterator().next();
         RoadPoint target = targets.iterator().next();
@@ -219,7 +214,7 @@ public class DijkstraBenchmark {
         List<Road> edges = algo.route(source, target, new Distance(), new Distance(), 10000d);
         sw.stop();
 
-        assertTrue(edges == null);
+        assertNull(edges);
 
         logger.info("no route bound example (fastest, priority): {} ms", sw.ms());
     }
@@ -229,15 +224,12 @@ public class DijkstraBenchmark {
         Set<RoadPoint> sources = map.spatial().nearest(new Point(11.58551, 48.17705));
         Set<RoadPoint> _targets = map.spatial().radius(new Point(11.57318, 48.17802), 100);
 
-        assertTrue(!sources.isEmpty());
-        assertTrue(!_targets.isEmpty());
+        assertFalse(sources.isEmpty());
+        assertFalse(_targets.isEmpty());
 
         RoadPoint source = sources.iterator().next();
 
-        HashSet<RoadPoint> targets = new HashSet<>();
-        for (RoadPoint target : _targets) {
-            targets.add(target);
-        }
+        HashSet<RoadPoint> targets = new HashSet<>(_targets);
 
         Stopwatch sw = new Stopwatch();
         sw.start();
@@ -266,7 +258,7 @@ public class DijkstraBenchmark {
 
         for (RoadPoint target : routes.keySet()) {
             if (routes.get(target) == null) {
-                assertEquals(routes2.get(target), null);
+                assertNull(routes2.get(target));
                 break;
             }
             Route route = new Route(source, target, routes.get(target));
@@ -279,12 +271,14 @@ public class DijkstraBenchmark {
             }
 
             if (logger.isTraceEnabled()) {
+                assert writer != null;
                 writer.println(GeometryEngine.geometryToWkt(route.geometry(),
                         WktExportFlags.wktExportLineString));
             }
         }
 
         if (logger.isTraceEnabled()) {
+            assert writer != null;
             writer.close();
             logger.trace("route(s) written to file {} (WKT)", filename);
         }
@@ -295,15 +289,12 @@ public class DijkstraBenchmark {
         Set<RoadPoint> sources = map.spatial().nearest(new Point(11.58551, 48.17705));
         Set<RoadPoint> _targets = map.spatial().radius(new Point(11.57318, 48.17802), 100);
 
-        assertTrue(!sources.isEmpty());
-        assertTrue(!_targets.isEmpty());
+        assertFalse(sources.isEmpty());
+        assertFalse(_targets.isEmpty());
 
         RoadPoint source = sources.iterator().next();
 
-        HashSet<RoadPoint> targets = new HashSet<>();
-        for (RoadPoint target : _targets) {
-            targets.add(target);
-        }
+        HashSet<RoadPoint> targets = new HashSet<>(_targets);
 
         Stopwatch sw = new Stopwatch();
         sw.start();
@@ -332,7 +323,7 @@ public class DijkstraBenchmark {
 
         for (RoadPoint target : routes.keySet()) {
             if (routes.get(target) == null) {
-                assertEquals(routes2.get(target), null);
+                assertNull(routes2.get(target));
                 break;
             }
             Route route = new Route(source, target, routes.get(target));
@@ -345,12 +336,14 @@ public class DijkstraBenchmark {
             }
 
             if (logger.isTraceEnabled()) {
+                assert writer != null;
                 writer.println(GeometryEngine.geometryToWkt(route.geometry(),
                         WktExportFlags.wktExportLineString));
             }
         }
 
         if (logger.isTraceEnabled()) {
+            assert writer != null;
             writer.close();
             logger.trace("route(s) written to file {} (WKT)", filename);
         }
@@ -361,10 +354,8 @@ public class DijkstraBenchmark {
         logger.info("SSMT (fastest, priority) stream test");
 
         Dijkstra<Road, RoadPoint> algo = new Dijkstra<>();
-        JSONArray jsonsamples = new JSONArray(new String(
-                Files.readAllBytes(
-                        Paths.get(MatcherTest.class.getResource("x0001-015.json").getPath())),
-                Charset.defaultCharset()));
+        JSONArray jsonsamples = new JSONArray(Files.readString(
+                Paths.get(Objects.requireNonNull(MatcherTest.class.getResource("x0001-015.json")).getPath()), Charset.defaultCharset()));
 
         assertTrue(jsonsamples.length() > 1);
 
@@ -376,8 +367,8 @@ public class DijkstraBenchmark {
             Set<RoadPoint> sources = map.spatial().radius(sample1.point(), 100);
             Set<RoadPoint> targets = map.spatial().radius(sample2.point(), 100);
 
-            assertTrue(!sources.isEmpty());
-            assertTrue(!targets.isEmpty());
+            assertFalse(sources.isEmpty());
+            assertFalse(targets.isEmpty());
 
             Stopwatch sw = new Stopwatch();
             sw.start();
@@ -408,18 +399,12 @@ public class DijkstraBenchmark {
         Set<RoadPoint> _sources = map.spatial().radius(new Point(11.58551, 48.17705), 100);
         Set<RoadPoint> _targets = map.spatial().radius(new Point(11.57318, 48.17802), 100);
 
-        assertTrue(!_sources.isEmpty());
-        assertTrue(!_targets.isEmpty());
+        assertFalse(_sources.isEmpty());
+        assertFalse(_targets.isEmpty());
 
-        HashSet<RoadPoint> sources = new HashSet<>();
-        for (RoadPoint source : _sources) {
-            sources.add(source);
-        }
+        HashSet<RoadPoint> sources = new HashSet<>(_sources);
 
-        HashSet<RoadPoint> targets = new HashSet<>();
-        for (RoadPoint target : _targets) {
-            targets.add(target);
-        }
+        HashSet<RoadPoint> targets = new HashSet<>(_targets);
 
         Stopwatch sw = new Stopwatch();
         sw.start();
@@ -450,18 +435,12 @@ public class DijkstraBenchmark {
         Set<RoadPoint> _sources = map.spatial().radius(new Point(11.58551, 48.17705), 100);
         Set<RoadPoint> _targets = map.spatial().radius(new Point(11.57318, 48.17802), 100);
 
-        assertTrue(!_sources.isEmpty());
-        assertTrue(!_targets.isEmpty());
+        assertFalse(_sources.isEmpty());
+        assertFalse(_targets.isEmpty());
 
-        HashSet<RoadPoint> sources = new HashSet<>();
-        for (RoadPoint source : _sources) {
-            sources.add(source);
-        }
+        HashSet<RoadPoint> sources = new HashSet<>(_sources);
 
-        HashSet<RoadPoint> targets = new HashSet<>();
-        for (RoadPoint target : _targets) {
-            targets.add(target);
-        }
+        HashSet<RoadPoint> targets = new HashSet<>(_targets);
 
         Stopwatch sw = new Stopwatch();
         sw.start();

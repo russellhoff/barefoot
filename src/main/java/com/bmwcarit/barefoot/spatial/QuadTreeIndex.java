@@ -13,6 +13,7 @@
 
 package com.bmwcarit.barefoot.spatial;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.nio.ByteBuffer;
 import java.util.Comparator;
@@ -38,6 +39,7 @@ import com.esri.core.geometry.WkbImportFlags;
  * Quad-tree index implementation of {@link SpatialIndex} to store polylines ({@link Polyline}).
  */
 public class QuadTreeIndex implements SpatialIndex<Tuple<Integer, Double>>, Serializable {
+    @Serial
     private static final long serialVersionUID = 1L;
     private final SpatialOperator spatial;
     private final static int height = 16;
@@ -208,14 +210,7 @@ public class QuadTreeIndex implements SpatialIndex<Tuple<Integer, Double>>, Seri
         Set<Integer> visited = new HashSet<>();
 
         PriorityQueue<Triple<Integer, Double, Double>> queue =
-                new PriorityQueue<>(k, new Comparator<Triple<Integer, Double, Double>>() {
-                    @Override
-                    public int compare(Triple<Integer, Double, Double> left,
-                            Triple<Integer, Double, Double> right) {
-                        return left.three() < right.three() ? -1
-                                : left.three() > right.three() ? +1 : 0;
-                    }
-                });
+                new PriorityQueue<>(k, Comparator.comparing(Triple::three));
 
         double radius = 100;
 

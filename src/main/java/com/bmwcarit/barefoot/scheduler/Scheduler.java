@@ -27,9 +27,9 @@ import org.slf4j.LoggerFactory;
 
 public class Scheduler {
     private final static Logger logger = LoggerFactory.getLogger(Scheduler.class);
-    final ArrayList<Worker> workers = new ArrayList<Worker>();
+    final ArrayList<Worker> workers = new ArrayList<>();
     final AtomicInteger workersup = new AtomicInteger();
-    final Queue<Task> queue = new ConcurrentLinkedQueue<Task>();
+    final Queue<Task> queue = new ConcurrentLinkedQueue<>();
     final AtomicInteger availTasks = new AtomicInteger();
     final AtomicBoolean stop = new AtomicBoolean();
     final Lock availLock = new ReentrantLock();

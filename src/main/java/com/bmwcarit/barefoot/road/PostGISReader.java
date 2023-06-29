@@ -39,7 +39,7 @@ import com.esri.core.geometry.WktExportFlags;
  * A {@link RoadReader} for reading {@link BaseRoad} objects from PostgreSQL/PostGIS database.
  */
 public class PostGISReader extends PostgresSource implements RoadReader {
-    private static Logger logger = LoggerFactory.getLogger(PostGISReader.class);
+    private static final Logger logger = LoggerFactory.getLogger(PostGISReader.class);
     private final static SpatialOperator spatial = new Geography();
     private final String table;
     private final Map<Short, Tuple<Double, Integer>> config;
@@ -90,7 +90,7 @@ public class PostGISReader extends PostgresSource implements RoadReader {
     public BaseRoad next() throws SourceException {
         if (result_set == null) {
 
-            String where = new String();
+            String where = "";
             if (polygon != null || exclusions != null) {
                 where += " WHERE";
                 if (polygon != null) {
@@ -111,9 +111,9 @@ public class PostGISReader extends PostgresSource implements RoadReader {
                 if (exclusions != null) {
                     Short[] myexclusions = new Short[exclusions.size()];
                     exclusions.toArray(myexclusions);
-                    String ids = " class_id != " + myexclusions[0];
+                    StringBuilder ids = new StringBuilder(" class_id != " + myexclusions[0]);
                     for (int i = 1; i < myexclusions.length; ++i) {
-                        ids += " AND class_id != " + myexclusions[i];
+                        ids.append(" AND class_id != ").append(myexclusions[i]);
                     }
                     logger.trace("query exclusions {}", ids);
                     where += ids;
@@ -161,7 +161,7 @@ public class PostGISReader extends PostgresSource implements RoadReader {
                         null);
                 float length = (float) spatial.length(geometry);
 
-                road = new BaseRoad(gid, source, target, osmId, reverse >= 0 ? false : true,
+                road = new BaseRoad(gid, source, target, osmId, !(reverse >= 0),
                         classId, priority, maxspeedForward, maxspeedBackward, length, wkb);
             } while (exclusions != null && exclusions.contains(road.type()));
 

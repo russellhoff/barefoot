@@ -15,14 +15,13 @@ package com.bmwcarit.barefoot.spatial;
 import java.io.IOException;
 import java.util.Set;
 
-import org.junit.Test;
-
 import com.bmwcarit.barefoot.roadmap.Loader;
 import com.bmwcarit.barefoot.roadmap.RoadMap;
 import com.bmwcarit.barefoot.roadmap.RoadPoint;
 import com.bmwcarit.barefoot.util.SourceException;
 import com.esri.core.geometry.GeometryEngine;
 import com.esri.core.geometry.Point;
+import org.junit.jupiter.api.Test;
 
 public class SpatialExample {
 

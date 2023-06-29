@@ -41,7 +41,7 @@ import com.bmwcarit.barefoot.util.Tuple;
  * Standard map loader that loads road map from database connection or file buffer.
  */
 public class Loader {
-    private static Logger logger = LoggerFactory.getLogger(Loader.class);
+    private static final Logger logger = LoggerFactory.getLogger(Loader.class);
 
     /**
      * Loads {@link RoadMap} object from database (or file buffer, if set to true) using database
@@ -129,7 +129,7 @@ public class Loader {
             throws JSONException, IOException {
         BufferedReader file = new BufferedReader(new InputStreamReader(new FileInputStream(path)));
 
-        String line = null, json = new String();
+        String line, json = "";
         while ((line = file.readLine()) != null) {
             json += line;
         }

@@ -56,11 +56,7 @@ public class PostgresSource {
      */
     public boolean isOpen() {
         try {
-            if (connection != null && connection.isValid(5)) {
-                return true;
-            } else {
-                return false;
-            }
+            return connection != null && connection.isValid(5);
         } catch (Exception e) {
             return false;
         }

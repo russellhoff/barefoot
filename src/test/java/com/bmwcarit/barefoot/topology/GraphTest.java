@@ -13,18 +13,11 @@
 
 package com.bmwcarit.barefoot.topology;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class GraphTest {
 
@@ -57,9 +50,9 @@ public class GraphTest {
 
             sources.put(0L, new HashSet<>(Arrays.asList(0L, 7L, 8L)));
             sources.put(1L, new HashSet<>(Arrays.asList(1L, 2L)));
-            sources.put(2L, new HashSet<>(Arrays.asList(3L)));
-            sources.put(3L, new HashSet<>(Arrays.asList(4L)));
-            sources.put(4L, new HashSet<>(Arrays.asList(6L)));
+            sources.put(2L, new HashSet<>(List.of(3L)));
+            sources.put(3L, new HashSet<>(List.of(4L)));
+            sources.put(4L, new HashSet<>(List.of(6L)));
             sources.put(5L, new HashSet<Long>());
 
             Iterator<Edge> edges = graph.edges();
@@ -119,11 +112,11 @@ public class GraphTest {
 
         Set<Set<Long>> sets = new HashSet<>();
 
-        sets.add(new HashSet<>(Arrays.asList(0L, 1L, 2L, 3L, 4L, 6L, 7L, 8L)));
-        sets.add(new HashSet<>(Arrays.asList(9L, 10L, 11L, 12L)));
-        sets.add(new HashSet<>(Arrays.asList(13L)));
-        sets.add(new HashSet<>(Arrays.asList(14L, 15L, 16L)));
-        sets.add(new HashSet<>(Arrays.asList(17L, 18L, 19L, 20L, 21L, 22L, 23L)));
+        sets.add(new HashSet<>(List.of(0L, 1L, 2L, 3L, 4L, 6L, 7L, 8L)));
+        sets.add(new HashSet<>(List.of(9L, 10L, 11L, 12L)));
+        sets.add(new HashSet<>(List.of(13L)));
+        sets.add(new HashSet<>(List.of(14L, 15L, 16L)));
+        sets.add(new HashSet<>(List.of(17L, 18L, 19L, 20L, 21L, 22L, 23L)));
 
         Set<Set<Edge>> components = graph.components();
 

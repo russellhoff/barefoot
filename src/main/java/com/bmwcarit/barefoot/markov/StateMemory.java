@@ -29,7 +29,7 @@ import org.json.JSONObject;
  * @param <T> Transition inherits from {@link StateTransition}.
  * @param <S> Sample inherits from {@link Sample}.
  */
-public class StateMemory<C extends StateCandidate<C, T, S>, T extends StateTransition, S extends Sample> {
+public class   StateMemory<C extends StateCandidate<C, T, S>, T extends StateTransition, S extends Sample> {
     private Set<C> candidates = new HashSet<>();
     private S sample = null;
 

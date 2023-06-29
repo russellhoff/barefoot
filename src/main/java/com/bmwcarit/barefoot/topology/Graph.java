@@ -13,16 +13,9 @@
 
 package com.bmwcarit.barefoot.topology;
 
+import java.io.Serial;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.Map;
-import java.util.Queue;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Directed graph providing a basic routing topology to be used by {@link Router} implementations.
@@ -30,6 +23,7 @@ import java.util.Set;
  * @param <E> {@link AbstractEdge} type of the graph.
  */
 public class Graph<E extends AbstractEdge<E>> implements Serializable {
+    @Serial
     private static final long serialVersionUID = 1L;
     protected final HashMap<Long, E> edges = new HashMap<>();
 
@@ -91,7 +85,7 @@ public class Graph<E extends AbstractEdge<E>> implements Serializable {
 
         for (E edge : edges.values()) {
             if (!map.containsKey(edge.source())) {
-                map.put(edge.source(), new ArrayList<>(Arrays.asList(edge)));
+                map.put(edge.source(), new ArrayList<>(List.of(edge)));
             } else {
                 map.get(edge.source()).add(edge);
             }

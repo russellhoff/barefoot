@@ -12,6 +12,7 @@
  */
 package com.bmwcarit.barefoot.roadmap;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -44,6 +45,7 @@ import com.esri.core.geometry.SpatialReference;
  * identifiers have a special mapping, see {@link Road}.
  */
 public class RoadMap extends Graph<Road> implements Serializable {
+    @Serial
     private static final long serialVersionUID = 1L;
     private static final Logger logger = LoggerFactory.getLogger(RoadMap.class);
     private transient Index index = null;
@@ -61,6 +63,7 @@ public class RoadMap extends Graph<Road> implements Serializable {
     }
 
     private class Index implements SpatialIndex<RoadPoint>, Serializable {
+        @Serial
         private static final long serialVersionUID = 1L;
         private final QuadTreeIndex index = new QuadTreeIndex();
 

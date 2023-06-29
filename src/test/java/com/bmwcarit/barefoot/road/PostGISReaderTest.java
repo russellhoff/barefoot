@@ -13,8 +13,6 @@
 
 package com.bmwcarit.barefoot.road;
 
-import static org.junit.Assert.assertTrue;
-
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Arrays;
@@ -22,7 +20,6 @@ import java.util.HashSet;
 import java.util.Properties;
 
 import org.json.JSONException;
-import org.junit.Test;
 
 import com.bmwcarit.barefoot.roadmap.Loader;
 import com.esri.core.geometry.Geometry.Type;
@@ -30,6 +27,9 @@ import com.esri.core.geometry.GeometryEngine;
 import com.esri.core.geometry.Polygon;
 import com.esri.core.geometry.SpatialReference;
 import com.esri.core.geometry.WktImportFlags;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class PostGISReaderTest {
 

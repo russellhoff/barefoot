@@ -12,24 +12,19 @@
  */
 package com.bmwcarit.barefoot.tracker;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.fail;
-
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-
-import org.junit.Test;
 
 import com.bmwcarit.barefoot.tracker.TemporaryMemory.Factory;
 import com.bmwcarit.barefoot.tracker.TemporaryMemory.Publisher;
 import com.bmwcarit.barefoot.tracker.TemporaryMemory.TemporaryElement;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class TemporaryMemoryTest {
 
-    private class Tint extends TemporaryElement<Tint> {
+    private static class Tint extends TemporaryElement<Tint> {
         private int value = 0;
 
         public Tint(String id) {

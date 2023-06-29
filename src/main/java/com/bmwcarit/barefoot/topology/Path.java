@@ -13,10 +13,7 @@
 
 package com.bmwcarit.barefoot.topology;
 
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Path of edges in a graph.
@@ -31,7 +28,7 @@ public class Path<E extends AbstractEdge<E>> {
     public Path(Point<E> single) {
         this.source = single;
         this.target = single;
-        this.edges = new LinkedList<>(Arrays.asList(single.edge()));
+        this.edges = new LinkedList<>(Collections.singletonList(single.edge()));
         if (!valid()) {
             throw new RuntimeException("unvalid path");
         }

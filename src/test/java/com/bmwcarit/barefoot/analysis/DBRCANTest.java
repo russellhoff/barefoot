@@ -13,9 +13,6 @@
 
 package com.bmwcarit.barefoot.analysis;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.DateFormat;
@@ -30,11 +27,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.junit.Test;
-
 import com.bmwcarit.barefoot.analysis.DBCAN.ISearchIndex;
 import com.bmwcarit.barefoot.util.Tuple;
 import com.esri.core.geometry.Point;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class DBRCANTest {
 

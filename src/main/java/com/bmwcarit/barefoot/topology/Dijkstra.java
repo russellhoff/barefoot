@@ -13,16 +13,9 @@
 
 package com.bmwcarit.barefoot.topology;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.io.Serial;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.PriorityQueue;
-import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,7 +31,7 @@ import com.bmwcarit.barefoot.util.Tuple;
  * @param <P> {@link Point} type of positions in the network.
  */
 public class Dijkstra<E extends AbstractEdge<E>, P extends Point<E>> implements Router<E, P> {
-    private static Logger logger = LoggerFactory.getLogger(Dijkstra.class);
+    private static final Logger logger = LoggerFactory.getLogger(Dijkstra.class);
 
     @Override
     public List<E> route(P source, P target, Cost<E> cost) {
@@ -73,13 +66,13 @@ public class Dijkstra<E extends AbstractEdge<E>, P extends Point<E>> implements 
     }
 
     private List<E> ssst(P source, P target, Cost<E> cost, Cost<E> bound, Double max) {
-        return ssmt(source, new HashSet<>(Arrays.asList(target)), cost, bound, max).get(target);
+        return ssmt(source, new HashSet<>(Collections.singletonList(target)), cost, bound, max).get(target);
     }
 
     private Map<P, List<E>> ssmt(P source, Set<P> targets, Cost<E> cost, Cost<E> bound,
             Double max) {
         Map<P, Tuple<P, List<E>>> map =
-                msmt(new HashSet<>(Arrays.asList(source)), targets, cost, bound, max);
+                msmt(new HashSet<>(Collections.singletonList(source)), targets, cost, bound, max);
         Map<P, List<E>> result = new HashMap<>();
         for (Entry<P, Tuple<P, List<E>>> entry : map.entrySet()) {
             result.put(entry.getKey(), entry.getValue() == null ? null : entry.getValue().two());
@@ -94,6 +87,7 @@ public class Dijkstra<E extends AbstractEdge<E>, P extends Point<E>> implements 
          * Route mark representation.
          */
         class Mark extends Quadruple<E, E, Double, Double> implements Comparable<Mark> {
+            @Serial
             private static final long serialVersionUID = 1L;
 
             /**
@@ -110,7 +104,7 @@ public class Dijkstra<E extends AbstractEdge<E>, P extends Point<E>> implements 
 
             @Override
             public int compareTo(Mark other) {
-                return (this.three() < other.three()) ? -1 : (this.three() > other.three()) ? 1 : 0;
+                return this.three().compareTo(other.three());
             }
         }
 
@@ -123,7 +117,7 @@ public class Dijkstra<E extends AbstractEdge<E>, P extends Point<E>> implements 
                     target.edge().id(), target.fraction());
 
             if (!targetEdges.containsKey(target.edge())) {
-                targetEdges.put(target.edge(), new HashSet<>(Arrays.asList(target)));
+                targetEdges.put(target.edge(), new HashSet<>(List.of(target)));
             } else {
                 targetEdges.get(target.edge()).add(target);
             }

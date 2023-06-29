@@ -13,8 +13,6 @@
 
 package com.bmwcarit.barefoot.markov;
 
-import static org.junit.Assert.assertEquals;
-
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -23,7 +21,10 @@ import java.util.Set;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.junit.Test;
+
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class StateTest {
 

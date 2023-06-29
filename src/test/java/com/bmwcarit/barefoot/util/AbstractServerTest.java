@@ -13,8 +13,7 @@
 
 package com.bmwcarit.barefoot.util;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+import org.junit.jupiter.api.Test;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -28,7 +27,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Properties;
 
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public class AbstractServerTest {
 
@@ -58,7 +58,7 @@ public class AbstractServerTest {
                         } catch (InterruptedException | NumberFormatException e) {
                             fail();
                         }
-                        response.append("work " + request + " ms");
+                        response.append("work ").append(request).append(" ms");
                         return RESULT.SUCCESS;
                     }
                 };
@@ -307,15 +307,9 @@ public class AbstractServerTest {
             BufferedReader reader =
                     new BufferedReader(new InputStreamReader(client.getInputStream()));
             switch (reader.readLine()) {
-                case "SUCCESS":
-                    success += 1;
-                    break;
-                case "ERROR":
-                    error += 1;
-                    break;
-                case "TIMEOUT":
-                    timeout += 1;
-                    break;
+                case "SUCCESS" -> success += 1;
+                case "ERROR" -> error += 1;
+                case "TIMEOUT" -> timeout += 1;
             }
             sw.stop();
 

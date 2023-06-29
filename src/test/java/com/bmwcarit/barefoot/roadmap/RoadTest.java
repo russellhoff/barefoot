@@ -13,11 +13,8 @@
 
 package com.bmwcarit.barefoot.roadmap;
 
-import static org.junit.Assert.assertEquals;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.junit.Test;
 
 import com.bmwcarit.barefoot.road.BaseRoad;
 import com.bmwcarit.barefoot.road.Heading;
@@ -26,6 +23,9 @@ import com.esri.core.geometry.GeometryEngine;
 import com.esri.core.geometry.Point;
 import com.esri.core.geometry.Polyline;
 import com.esri.core.geometry.WktImportFlags;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class RoadTest {
 

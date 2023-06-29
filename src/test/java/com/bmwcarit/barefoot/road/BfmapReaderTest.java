@@ -12,18 +12,17 @@
  */
 package com.bmwcarit.barefoot.road;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
-
 import java.io.IOException;
 import java.util.HashSet;
 
 import org.json.JSONException;
-import org.junit.Test;
 
 import com.bmwcarit.barefoot.roadmap.Testmap;
 import com.bmwcarit.barefoot.roadmap.Road;
 import com.bmwcarit.barefoot.roadmap.RoadMap;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class BfmapReaderTest {
 
@@ -60,9 +59,9 @@ public class BfmapReaderTest {
                     fail();
                 }
 
-                assertTrue(road.source() == other.source());
-                assertTrue(road.target() == other.target());
-                assertTrue(road.refid() == other.base().refid());
+                assertEquals(road.source(), other.source());
+                assertEquals(road.target(), other.target());
+                assertEquals(road.refid(), other.base().refid());
 
                 if (set.contains(road.id())) {
                     fail();

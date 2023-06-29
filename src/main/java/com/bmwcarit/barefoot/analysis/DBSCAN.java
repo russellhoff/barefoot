@@ -97,7 +97,7 @@ public class DBSCAN {
                 Envelope2D env = new Envelope2D();
                 point.queryEnvelope2D(env);
                 index.insert(hash, env);
-                points.put(hash, new LinkedList<Point>(Arrays.asList(point)));
+                points.put(hash, new LinkedList<>(List.of(point)));
             }
 
             return true;
@@ -115,11 +115,7 @@ public class DBSCAN {
                         it = bucketit.next().iterator();
                     }
 
-                    if (it == null || !it.hasNext()) {
-                        return false;
-                    } else {
-                        return true;
-                    }
+                    return it != null && it.hasNext();
                 }
 
                 @Override

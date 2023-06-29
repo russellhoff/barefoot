@@ -13,8 +13,6 @@
 
 package com.bmwcarit.barefoot.markov;
 
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -104,16 +102,13 @@ public class KState<C extends StateCandidate<C, T, S>, T extends StateTransition
             sequence.add(new Tuple<>(vector, sample));
         }
 
-        Collections.sort(sequence, new Comparator<Tuple<Set<C>, S>>() {
-            @Override
-            public int compare(Tuple<Set<C>, S> left, Tuple<Set<C>, S> right) {
-                if (left.two().time() < right.two().time()) {
-                    return -1;
-                } else if (left.two().time() > right.two().time()) {
-                    return +1;
-                }
-                return 0;
+        sequence.sort((left, right) -> {
+            if (left.two().time() < right.two().time()) {
+                return -1;
+            } else if (left.two().time() > right.two().time()) {
+                return +1;
             }
+            return 0;
         });
     }
 

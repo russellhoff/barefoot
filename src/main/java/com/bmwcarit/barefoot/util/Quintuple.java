@@ -13,6 +13,7 @@
 
 package com.bmwcarit.barefoot.util;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
@@ -25,6 +26,7 @@ import java.io.Serializable;
  * @param <E> Type of fifth element.
  */
 public class Quintuple<A, B, C, D, E> extends Quadruple<A, B, C, D> implements Serializable {
+    @Serial
     private static final long serialVersionUID = 1L;
     private E five = null;
 

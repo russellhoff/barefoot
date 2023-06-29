@@ -13,13 +13,8 @@
 
 package com.bmwcarit.barefoot.spatial;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
-
-import org.junit.Test;
 
 import com.bmwcarit.barefoot.util.Stopwatch;
 import com.bmwcarit.barefoot.util.Triple;
@@ -31,19 +26,21 @@ import com.esri.core.geometry.WktImportFlags;
 
 import net.sf.geographiclib.Geodesic;
 import net.sf.geographiclib.GeodesicData;
+import org.junit.jupiter.api.Test;
 
-;
+;import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class GeographyTest {
 
     private static final boolean benchmark = false;
     private static final boolean wktexport = false;
 
-    private static Stopwatch sw1 = new Stopwatch();
-    private static Stopwatch sw2 = new Stopwatch();
-    private static Stopwatch sw3 = new Stopwatch();
-    private static Stopwatch sw4 = new Stopwatch();
-    private static SpatialOperator spatial = new Geography();
+    private static final Stopwatch sw1 = new Stopwatch();
+    private static final Stopwatch sw2 = new Stopwatch();
+    private static final Stopwatch sw3 = new Stopwatch();
+    private static final Stopwatch sw4 = new Stopwatch();
+    private static final SpatialOperator spatial = new Geography();
 
     private static Triple<Point, Double, Double> intercept(Point a, Point b, Point c) {
         int iter = 1000;
@@ -173,7 +170,7 @@ public class GeographyTest {
                 WktImportFlags.wktImportDefaults, Type.Polyline);
         Point a = ab.getPoint(0), b = ab.getPoint(1);
 
-        String points[] = new String[] {"POINT(11.406501117689324 48.14051652560591)", // East
+        String[] points = new String[] {"POINT(11.406501117689324 48.14051652560591)", // East
                 "POINT(11.406713245538327 48.14182906667162)", // Northeast
                 "POINT(11.404923416812364 48.14258477213369)", // North
                 "POINT(11.403300759321036 48.14105540093837)", // Northwest
@@ -183,8 +180,8 @@ public class GeographyTest {
                 "POINT(11.406255844863914 48.13963486923349)" // Southeast
         };
 
-        for (int i = 0; i < points.length; ++i) {
-            Point c = (Point) GeometryEngine.geometryFromWkt(points[i],
+        for (String point : points) {
+            Point c = (Point) GeometryEngine.geometryFromWkt(point,
                     WktImportFlags.wktImportDefaults, Type.Point);
 
             sw1.start();

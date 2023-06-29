@@ -13,6 +13,7 @@
 
 package com.bmwcarit.barefoot.util;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
@@ -24,6 +25,7 @@ import java.io.Serializable;
  * @param <D> Type of fourth element.
  */
 public class Quadruple<A, B, C, D> extends Triple<A, B, C> implements Serializable {
+    @Serial
     private static final long serialVersionUID = 1L;
     private D four = null;
 

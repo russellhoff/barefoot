@@ -14,11 +14,14 @@
 package com.bmwcarit.barefoot.util;
 
 
+import java.io.Serial;
+
 /**
  * Exception for handling any sort of data sources.
  */
 public class SourceException extends RuntimeException {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     /**

@@ -13,6 +13,7 @@
 
 package com.bmwcarit.barefoot.road;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.nio.ByteBuffer;
 
@@ -32,6 +33,7 @@ import com.esri.core.geometry.WkbImportFlags;
  * (e.g. {@link BaseRoad#length()} and {@link BaseRoad#geometry()}).
  */
 public class BaseRoad implements Serializable {
+    @Serial
     private static final long serialVersionUID = 1L;
     private final long id;
     private final long refid;

@@ -103,7 +103,7 @@ public abstract class Benchmark {
     public static List<Triple<Long, Long, Double>> candidatesToSequence(
             List<MatcherCandidate> candidates) {
         LinkedList<Triple<Long, Long, Double>> sequence =
-                new LinkedList<Triple<Long, Long, Double>>();
+                new LinkedList<>();
 
         for (MatcherCandidate candidate : candidates) {
             if (candidate.transition() == null) {
@@ -115,7 +115,7 @@ public abstract class Benchmark {
                         && sequence.peekLast().two() == segment.target()) {
                     continue;
                 }
-                sequence.add(new Triple<Long, Long, Double>(segment.source(), segment.target(),
+                sequence.add(new Triple<>(segment.source(), segment.target(),
                         (double) segment.length()));
             }
         }

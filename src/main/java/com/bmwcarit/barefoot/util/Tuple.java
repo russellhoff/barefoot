@@ -13,6 +13,7 @@
 
 package com.bmwcarit.barefoot.util;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
@@ -22,6 +23,7 @@ import java.io.Serializable;
  * @param <Y> Type of second element.
  */
 public class Tuple<X, Y> implements Serializable {
+    @Serial
     private static final long serialVersionUID = 1L;
     private X one = null;
     private Y two = null;

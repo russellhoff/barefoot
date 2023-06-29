@@ -48,10 +48,9 @@ public abstract class Task implements Runnable {
             }
         }
 
-        if (syncExecute.get() == true) {
+        if (syncExecute.get()) {
             if (syncChildren.decrementAndGet() == 0) {
                 worker.enqueue(this);
-                return;
             }
         } else {
             if (group != null) {

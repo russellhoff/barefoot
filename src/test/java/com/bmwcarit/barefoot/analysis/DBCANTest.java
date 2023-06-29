@@ -13,18 +13,17 @@
 
 package com.bmwcarit.barefoot.analysis;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
-import org.junit.Test;
-
 import com.bmwcarit.barefoot.analysis.DBCAN.ISearchIndex;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class DBCANTest {
 
@@ -189,9 +188,9 @@ public class DBCANTest {
     @Test
     public void testRadius() {
         {
-            ISearchIndex<Double> index = new DBCAN.SearchIndex(Arrays.asList(0.0));
+            ISearchIndex<Double> index = new DBCAN.SearchIndex(List.of(0.0));
             List<Double> result = index.radius(-1.0, 1.0);
-            List<Double> interval = Arrays.asList(0.0);
+            List<Double> interval = List.of(0.0);
             assertEquals(result.size(), interval.size());
             for (Double value : result) {
                 assertTrue(interval.contains(value));

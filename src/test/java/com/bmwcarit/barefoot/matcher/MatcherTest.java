@@ -13,9 +13,6 @@
 
 package com.bmwcarit.barefoot.matcher;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -27,7 +24,6 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import org.json.JSONException;
-import org.junit.Test;
 
 import com.bmwcarit.barefoot.road.BaseRoad;
 import com.bmwcarit.barefoot.road.RoadReader;
@@ -51,6 +47,11 @@ import com.esri.core.geometry.Point;
 import com.esri.core.geometry.Polygon;
 import com.esri.core.geometry.Polyline;
 import com.esri.core.geometry.WktImportFlags;
+
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MatcherTest {
     private final SpatialOperator spatial = new Geography();
@@ -209,14 +210,14 @@ public class MatcherTest {
             Point sample = new Point(11.010, 48.000);
 
             Set<Tuple<MatcherCandidate, Double>> candidates = filter
-                    .candidates(new HashSet<MatcherCandidate>(), new MatcherSample(0, sample));
+                    .candidates(new HashSet<>(), new MatcherSample(0, sample));
 
             Set<Long> refset = new HashSet<>(Arrays.asList(0L, 3L));
             Set<Long> set = new HashSet<>();
 
             for (Tuple<MatcherCandidate, Double> candidate : candidates) {
-                assertTrue(Long.toString(candidate.one().point().edge().id()),
-                        refset.contains(candidate.one().point().edge().id()));
+                assertTrue(refset.contains(candidate.one().point().edge().id()),
+                        Long.toString(candidate.one().point().edge().id()));
                 assertCandidate(candidate, sample);
                 set.add(candidate.one().point().edge().id());
             }
@@ -228,14 +229,14 @@ public class MatcherTest {
             Point sample = new Point(11.011, 48.001);
 
             Set<Tuple<MatcherCandidate, Double>> candidates = filter
-                    .candidates(new HashSet<MatcherCandidate>(), new MatcherSample(0, sample));
+                    .candidates(new HashSet<>(), new MatcherSample(0, sample));
 
             Set<Long> refset = new HashSet<>(Arrays.asList(0L, 2L, 3L));
             Set<Long> set = new HashSet<>();
 
             for (Tuple<MatcherCandidate, Double> candidate : candidates) {
-                assertTrue(Long.toString(candidate.one().point().edge().id()),
-                        refset.contains(candidate.one().point().edge().id()));
+                assertTrue(refset.contains(candidate.one().point().edge().id()),
+                        Long.toString(candidate.one().point().edge().id()));
                 assertCandidate(candidate, sample);
                 set.add(candidate.one().point().edge().id());
             }
@@ -253,8 +254,8 @@ public class MatcherTest {
             Set<Long> set = new HashSet<>();
 
             for (Tuple<MatcherCandidate, Double> candidate : candidates) {
-                assertTrue(Long.toString(candidate.one().point().edge().id()),
-                        refset.contains(candidate.one().point().edge().id()));
+                assertTrue(refset.contains(candidate.one().point().edge().id()),
+                        Long.toString(candidate.one().point().edge().id()));
                 assertCandidate(candidate, sample);
                 set.add(candidate.one().point().edge().id());
             }
@@ -273,8 +274,8 @@ public class MatcherTest {
             Set<Long> set = new HashSet<>();
 
             for (Tuple<MatcherCandidate, Double> candidate : candidates) {
-                assertTrue(Long.toString(candidate.one().point().edge().id()),
-                        refset.contains(candidate.one().point().edge().id()));
+                assertTrue(refset.contains(candidate.one().point().edge().id()),
+                        Long.toString(candidate.one().point().edge().id()));
                 assertCandidate(candidate, sample);
                 set.add(candidate.one().point().edge().id());
             }

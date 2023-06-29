@@ -12,8 +12,6 @@
  */
 package com.bmwcarit.barefoot.tracker;
 
-import static org.junit.Assert.assertEquals;
-
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -26,12 +24,13 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Properties;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -40,10 +39,12 @@ import com.bmwcarit.barefoot.matcher.MatcherKState;
 import com.bmwcarit.barefoot.matcher.MatcherSample;
 import com.bmwcarit.barefoot.matcher.ServerTest;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public class TrackerServerTest {
     private final static Logger logger = LoggerFactory.getLogger(TrackerServerTest.class);
 
-    private class Server implements Runnable {
+    private static class Server implements Runnable {
         @Override
         public void run() {
             TrackerControl.initServer("config/tracker.properties", "config/oberbayern.properties");
@@ -104,6 +105,7 @@ public class TrackerServerTest {
 
                 if (trials == 0) {
                     logger.error(e.getMessage());
+                    assert client != null;
                     client.close();
                     throw new IOException();
                 } else {
@@ -140,10 +142,8 @@ public class TrackerServerTest {
 
         server.start();
         {
-            String json = new String(
-                    Files.readAllBytes(
-                            Paths.get(ServerTest.class.getResource("x0001-015.json").getPath())),
-                    Charset.defaultCharset());
+            String json = Files.readString(
+                    Paths.get(Objects.requireNonNull(ServerTest.class.getResource("x0001-015.json")).getPath()), Charset.defaultCharset());
             List<MatcherSample> samples = new LinkedList<>();
             JSONArray jsonsamples = new JSONArray(json);
             for (int i = 0; i < jsonsamples.length(); ++i) {
