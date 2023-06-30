@@ -1,5 +1,5 @@
---- /etc/postgresql/9.3/main/postgresql.conf.original	2014-10-25 19:55:37.478260085 +0000
-+++ /etc/postgresql/9.3/main/postgresql.conf	2014-10-25 20:12:12.215516083 +0000
+--- /etc/postgresql/15/main/postgresql.conf.original	2014-10-25 19:55:37.478260085 +0000
++++ /etc/postgresql/15/main/postgresql.conf	2014-10-25 20:12:12.215516083 +0000
 @@ -56,7 +56,7 @@
  
  # - Connection Settings -

@@ -11,18 +11,37 @@
 # language governing permissions and limitations under the License.
 #
 
-FROM postgis/postgis:13-master
+FROM ubuntu:22.04
 
 MAINTAINER sebastian.mattheis@bmw-carit.de
 
+ENV DEBIAN_FRONTEND=noninteractive
+ENV TZ=UTC
+
+# Actualizar el sistema y instalar los paquetes necesarios
+RUN apt-get update && apt-get install -y \
+    wget \
+    gnupg2 \
+    lsb-release
+
+# Agregar el repositorio oficial de PostgreSQL
+RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add - && \
+    echo "deb http://apt.postgresql.org/pub/repos/apt/ $(lsb_release -cs)-pgdg main" >> /etc/apt/sources.list.d/pgdg.list
+
 ADD /pgsql/ /opt/pgsql/
-RUN ls -lisah /etc/postgresql
 RUN apt-get update
-RUN apt-cache search openjdk | grep 17
-RUN apt-get -y install patch
-RUN apt-get -y install git
-RUN apt-get -y install ca-certificates-java openjdk-17-jdk-headless
-RUN apt-get -y install python3-psycopg2 python3-numpy python3-gdal
-RUN patch /etc/postgresql/13/main/postgresql.conf < /opt/pgsql/postgresql.conf.patch && patch /etc/postgresql/13/main/pg_hba.conf < /opt/pgsql/pg_hba.conf.patch && echo "export HOME=/root" >> /root/.bashrc
+RUN apt-get install -y  \
+    postgresql \
+    postgis  \
+    patch  \
+    git  \
+    ca-certificates-java  \
+    openjdk-17-jdk-headless  \
+    python3-psycopg2  \
+    python3-numpy  \
+    python3-gdal
+RUN patch /etc/postgresql/15/main/postgresql.conf < /opt/pgsql/postgresql.conf.patch
+# RUN patch --ignore-whitespace --binary /etc/postgresql/15/main/pg_hba.conf < /opt/pgsql/pg_hba.conf.patch
+RUN echo "export HOME=/root" >> /root/.bashrc
 RUN cd /opt/ && git clone https://github.com/openstreetmap/osmosis.git && cd osmosis && git checkout tags/0.48.3 && ./gradlew assemble && echo "export PATH=${PATH}:/opt/osmosis/package/bin" >> /root/.bashrc
 CMD service postgresql start && /bin/bash --rcfile /root/.bashrc
