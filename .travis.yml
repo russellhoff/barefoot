@@ -1,9 +1,8 @@
 sudo: required
 language: java
 jdk:
-  # Build and test Barefoot library using JDK 7, 8
-  - openjdk7
-  - oraclejdk8
+  # Build and test Barefoot library using JDK 17
+  - openjdk17
 matrix:
   include:
     - env: NAME="Matcher Server"
@@ -30,7 +29,7 @@ matrix:
         - until docker exec barefoot-database sudo --user=postgres -- psql --command='select 1;'; do sleep 1; done
       script: docker exec barefoot-database /bin/bash /mnt/map/tools/test/run.sh
     - env: NAME="Java Formatting"
-      jdk: oraclejdk8
+      jdk: openjdk17
       before_install: true
       install: mvn formatter:format
       before_script: true
