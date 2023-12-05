@@ -14,6 +14,7 @@ package com.bmwcarit.barefoot.markov;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Comparator;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -22,7 +23,7 @@ import org.json.JSONObject;
  * Measurement sample as input for Hidden Markov Model (HMM) inference, e.g. with a HMM filter
  * {@link Filter}.
  */
-public class Sample {
+public class Sample implements Comparable<Sample> {
     private long time;
 
     /**
@@ -78,4 +79,9 @@ public class Sample {
         return json;
     }
 
+    @Override
+    public int compareTo(Sample o) {
+        long i = o.time() - this.time;
+        return (int) i;
+    }
 }

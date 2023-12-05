@@ -21,8 +21,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
-import com.bmwcarit.barefoot.comparator.SampleComparator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -363,11 +363,14 @@ public class Matcher extends Filter<MatcherCandidate, MatcherTransition, Matcher
      * @return State representation of the full matching which is a {@link KState} object.
      */
     public MatcherKState mmatch(List<MatcherSample> samples, double minDistance, int minInterval) {
-        samples.sort(new SampleComparator());
+        List<MatcherSample> samplesSort3ed = samples
+                .stream()
+                .sorted()
+                .collect(Collectors.toList());
 
         MatcherKState state = new MatcherKState();
 
-        for (MatcherSample sample : samples) {
+        for (MatcherSample sample : samplesSort3ed) {
             if (state.sample() != null && (spatial.distance(sample.point(),
                     state.sample().point()) < Math.max(0, minDistance)
                     || (sample.time() - state.sample().time()) < Math.max(0, minInterval))) {
