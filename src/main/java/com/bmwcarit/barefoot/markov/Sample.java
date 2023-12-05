@@ -77,4 +77,5 @@ public class Sample {
         json.put("time", time);
         return json;
     }
+
 }
