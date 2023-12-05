@@ -353,7 +353,7 @@ public class Matcher extends Filter<MatcherCandidate, MatcherTransition, Matcher
      * Matches a full sequence of samples, {@link MatcherSample} objects and returns state
      * representation of the full matching which is a {@link KState} object.
      *
-     * @param samples Sequence of samples, {@link MatcherSample} objects.
+     * @param samples Sequence of samples, {@link MatcherSample} objects. Precondition: sort them by time.
      * @param minDistance Minimum distance in meters between subsequent samples as criterion to
      *        match a sample. (Avoids unnecessary matching where samples are more dense than
      *        necessary.)
@@ -363,14 +363,9 @@ public class Matcher extends Filter<MatcherCandidate, MatcherTransition, Matcher
      * @return State representation of the full matching which is a {@link KState} object.
      */
     public MatcherKState mmatch(List<MatcherSample> samples, double minDistance, int minInterval) {
-        List<MatcherSample> samplesSort3ed = samples
-                .stream()
-                .sorted()
-                .collect(Collectors.toList());
-
         MatcherKState state = new MatcherKState();
 
-        for (MatcherSample sample : samplesSort3ed) {
+        for (MatcherSample sample : samples) {
             if (state.sample() != null && (spatial.distance(sample.point(),
                     state.sample().point()) < Math.max(0, minDistance)
                     || (sample.time() - state.sample().time()) < Math.max(0, minInterval))) {
